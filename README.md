@@ -1,4 +1,4 @@
-# dicoding-stateful-komponen
+# Stateful Component
 
 
 ## Pengantar Stateful Component
