@@ -260,3 +260,60 @@ Walaupun cara pertama terlihat singkat, tetapi secara personal lebih menyukai ca
 Lalu, kapan dan di mana kita harus panggil fungsi setState() untuk perbarui __state__ ? Adala ketika terjadi interaksi dari pengguna. 
 
 Untuk menangkap interaksi pengguna pada React komponen, kita perlu belajar terlebih dahulu Event Handling bekerja di React.
+
+## Event Handling
+
+Sejatinya, event handling di React memiliki kemiripan dengan apa yang dilakukan di DOM.
+Contohnya, kita dapat menetapkan event pada elemen dengan cara seperti ini.
+
+```html
+
+<button onclick='increaseValue()'> + Value </button>
+
+```
+
+Sedangkan di React, kita menetapkan event seperti berikut .
+
+```html
+
+<button onClick={increaseValue}> + Value </button>
+
+```
+
+Pemberian nama event menggunakan CamelCase di React. Sehingga penulisannya menjadi __onClick__ .
+Daftar prop selengkapnya di [sini](https://react.dev/reference/react-dom/components/common#common)
+
+Ketika menggunakan React, anda tidak perlu menggunakan perintah addEventListener(), cukup sediakan event handler
+di properti.
+
+### Props Drilling Event handler
+
+State sebaiknya berada di komponen parent dan hanya diubah oleh komponen itu sendiri. Maka dari
+itu fungsi handler untuk mengubah state, harus berada di komponen Parent.
+
+Ketika anda memecah komponen jadi kecil, kemungkinan anda akan menemui kasus di mana komponen
+yang menerima input pengguna (tombol) dibuat secara terpisah dari komponen parent.
+Ketika itu terjadi, anda perlu memberikan event handler lewat props secara driling.
+Hal ini sangat umum dilakukan karena React menganut konsep __unidirectional data flow__
+
+ilustrasi state
+
+![state flow](/images/pic0002.png)
+
+State __count__ hidup di dalam komponen CounterApp yang merupakan parent komponen. Karena CounterApp
+pemilik state, maka dia yang berhak memperbarui data melalui fungsi onIncreaseEventHandler.
+
+Bagan di atas menunjukkan bahwa kita memecah UI berdasarkan tugas.
+Tugas pertama menampilkan data __count__ didelegasikan pada komponen CounterScreen sehingga komponen
+tersebut diberikan data __count__ oleh parent melalui props.
+
+Selanjutnya, tugas kedua yaitu menerima input utk menambah nilai count, yang didelegasikan ke komponen
+IncreaseButton. Disini praktek props drilling event handler dilakukan. IncreaseButton tidak berhak mengubah
+data count. Itulah sebabnya ia diberikan fungsi handler milik parent lewat props.
+Fungsi handler digunakan ketika IncreaseButton menerima input dari pengguna.
+
+Data yang disimpan di dalam state bersifat reactive. Jika data berubah, ia akan merender ulang
+komponen yang ditampilkan sehingga data yang tampak akan selalu up to date.
+
+## Latihan Komponen State dan Event Handling
+
