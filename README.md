@@ -494,3 +494,78 @@ createRoot(document.getElementById('root')).render(
 Tampilan Counter
 
 ## Latihan Studi Kasus: Menambahkan fitur hapus kontak
+
+Sejauh ini kita berhasil membuat class komponen dan menggunakan state. Sekarang saatnya menerapkan
+hal ini ke projek sebelumnya. Kita akan menambah fitur baru. Fitur yang dimaksud adalah hapus kontak.
+
+Kita akan menambah komponen DeleteButton.jsx
+
+DeleteButton.jsx
+```jsx
+
+    import React from 'react';
+     
+    function DeleteButton({ id, onDelete }) {
+      return <button className='contact-item__delete' onClick={() => onDelete(id)}>X</button>
+    }
+     
+    export default DeleteButton;
+
+```
+
+Komponen DeleteButton menerima 2 properti yaitu id dan onDelete.
+Properti __id__ untuk referensi id yang akan dihapus.
+Sedangkan onDelete merupakan handler untuk hapus kontak.
+
+Terlihat bahwa event onClick memanggil handler onDelete. Pemanggilan fungsi onDeete dengan diberikan nilai id
+dan dibungkus anonymous function. Inilah cara memberikan nilai argumen pada fungsi event handler. selengkapnya
+tentang passing argumen ke event handler di tautan [berikut](https://legacy.reactjs.org/docs/handling-events.html#passing-arguments-to-event-handlers)
+
+nb : mengapa terdapat "on" pada onDelete ? Penamaan ini digunakan untuk menghindari reserved word di javascript.
+Benar, delete adalah operator di javascript. Maka dari itu ditambahkan on untuk mengakali hal tersebut.
+
+Selanjutnya letakkan komponen DeleteButton di dalam komponen KonakItem.
+
+KonakItem.jsx
+```jsx
+
+import React from "react";
+import ItemBody from "./ItemBody";
+import ItemImg from "./ItemImg";
+import DeleteButton from "./DeleteButton" ;
+
+export default function KonakItem({imageUrl, name, tag,id,onDelete}){ // menambah props id dan onDelete
+    return (
+        <div className="contact-item">
+            <ItemImg imageUrl={imageUrl} />
+            <ItemBody name={name} tag={tag} />
+            <DeleteButton id={id} onDelete={onDelete} /> <!--  menambah komponen DeleteButton -->
+        </div>
+    );
+}
+
+```
+Selanjutnya, tombol delete akan muncul di aplikasi namun belum bisa digunakan. Hal ini karena kita belum menetapkan nilai
+event handlernya.
+
+Sekarang, kita akan memberikan nilai id dan onDelete pada komponen pembungkus dari KonakItem, yaitu KonakList.
+Sesuaikan kodenya menjadi sebagai berikut.
+
+KonakList
+```jsx
+
+import React from "react";
+import KonakItem from "./KonakItem";
+
+export default function KonakList({kontaks,onDelete}){ // tambah props onDelete
+    return (
+        <div className="contact-list">
+           {
+            kontaks.map((kontak) => (
+                <KonakItem key={kontak.id} id={kontak.id} onDelete={onDelete} {...kontak} /> <!-- tambah onDelete, id-->
+            ))
+           }
+        </div>
+    );
+}
+```
