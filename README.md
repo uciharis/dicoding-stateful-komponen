@@ -317,3 +317,17 @@ komponen yang ditampilkan sehingga data yang tampak akan selalu up to date.
 
 ## Latihan Komponen State dan Event Handling
 
+Kita akan membuat aplikasi counter dengan tujuan sbb:
+
+- tahu cara menyimpan data di __state__
+- tahu cara ubah data di __state__
+- memanfaatkan data di state untuk tampilkan UI
+- tahu cara event handling di komponen
+
+Aplikasi yang akan dibuat adalah counter FizzBuzz. Logika aplikasi ini adalah :  
+a. bila kelipatan 5 - menampilkan "FIZZ"  
+b. bila kelipatan 7 - menampilkan "BUZZ"   
+c. bila kelipatan 5 dan 7 - menampikan "FIZZBUZZ"
+
+Aplikasi diatas juga memiliki tombol "+" utk meningkatkan nilai, dan tombol reset utk mengatur
+ulang.
