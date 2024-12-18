@@ -492,3 +492,5 @@ createRoot(document.getElementById('root')).render(
 
 ![FizzBuzz Counter](/images/pic0004.png)   
 Tampilan Counter
+
+## Latihan Studi Kasus: Menambahkan fitur hapus kontak
