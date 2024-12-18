@@ -331,3 +331,155 @@ c. bila kelipatan 5 dan 7 - menampikan "FIZZBUZZ"
 
 Aplikasi diatas juga memiliki tombol "+" utk meningkatkan nilai, dan tombol reset utk mengatur
 ulang.
+
+Berikut struktur file dan folder dari aplikasi tersebut :
+
+![struktur file](/images/pic0003.png)
+
+File main.jsx merupakan entry point dari FizzBuzz counter. Main.jsx terdiri dari 2 komponen, yaitu komponen Title dan App.
+
+Sedangkan komponen App terdiri dari 3 komponen yang lebih kecil, yaitu :
+- CounterDisplay
+- IncreaseButton
+- ResetButton
+
+Berikut beberapa kode komponen-komponennya.
+
+CounterDisplay.jsx
+```jsx
+
+import React from 'react';
+
+function CounterDisplay({ count }) {
+  if (count === 0){
+    return <p className='count'>{count}</p>
+  }
+
+  if (count %5 === 0 && count %7 === 0){
+    return <p className='fizzbuzz'>FizzBuzz</p>
+  }
+
+  if (count %5 === 0){
+    return <p className='fizz'>FIZZ</p>
+  }
+
+  if (count %7 === 0){
+    return <p className='buzz'>BUZZ</p>
+  }
+  
+  return (
+    <div className="counter">
+      <p className="count">{count}</p>
+    </div>
+  );
+}
+
+export default CounterDisplay;
+
+```
+
+IncreaseButton.jsx
+```jsx
+
+import React from 'react';
+
+function IncreaseButton({ increase }) {
+  return (
+    <button onClick={increase} className="button increase">
+      + Increase
+    </button>
+  );
+}
+
+export default IncreaseButton;
+
+```
+
+ResetButton.jsx
+```jsx
+
+import React from 'react';
+
+function ResetButton({ reset }) {
+  return (
+    <button onClick={reset} className="button reset">
+      Reset
+    </button>
+  );
+}
+
+export default ResetButton;
+
+```
+
+App.jsx
+```jsx
+
+import React, { Component } from 'react';
+import './App.css';
+import IncreaseButton from './IncreaseButton';
+import CounterDisplay from './CounterDisplay';
+import ResetButton from './ResetButton';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 0
+    };
+
+    // Binding methods in constructor
+    this.onIncreaseEventHandler = this.onIncreaseEventHandler.bind(this);
+    this.onResetEventHandler = this.onResetEventHandler.bind(this);
+  }
+
+  onIncreaseEventHandler() {
+    this.setState((previousState) => {
+      return {
+        count: previousState.count + 1
+      };
+    });
+  }
+
+  onResetEventHandler() {
+    this.setState({
+      count: 0
+    });
+  }
+  
+  render() {
+    return (
+      <>
+      <div className="container">
+        <CounterDisplay count={this.state.count} />
+      </div>
+      <div className="buttons">
+          <IncreaseButton increase={this.onIncreaseEventHandler} />
+          <ResetButton reset={this.onResetEventHandler} />
+        </div>
+        </>
+    );
+  }
+}
+
+export default App;
+
+```
+main.jsx
+```jsx
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import Title from './Title.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <Title />
+    <App />
+  </StrictMode>,
+)
+
+```
