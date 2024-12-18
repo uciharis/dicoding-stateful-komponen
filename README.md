@@ -481,5 +481,14 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
-
 ```
+
+
+
+
+
+
+
+
+![FizzBuzz Counter](/images/pic0004.png)   
+Tampilan Counter
