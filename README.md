@@ -633,5 +633,101 @@ export default KonakApp;
 
 Jika kode benar, akan menghasilkan tampilan berikut :
 
-Tampilan dengan tombol delete X
-[UI dengan delete button](/images/pic0005.png)
+Tampilan dengan tombol delete X  
+![UI dengan delete button](/images/pic0005.png)
+
+
+## Controlled Komponen (form)
+
+Ketika anda membuat form pada aplikasi web. biasanya state atau data input berada di dalam DOM.
+Di React, state sangat efektif bila dilakukan di dalam komponen. Maka dari itu jika mengelola nilai form
+sebaiknya tidak dilakukan di dalam DOM, melainkan di dalam komponen dengan memanfaatkan state.
+
+Controlled komponen merupakan komponen yang me-render form,  tetapi sumber datanya diambil dari komponen state,
+bukan DOM. Alasan mengapa disebut dengan controlled komponen karena React mengontrol data form.
+
+Contoh disini kita memiliki komponen yang me-render form dengan satu input.
+
+```jsx
+
+    import React from 'react';
+     
+    class NameForm extends React.Component {
+      constructor(props) {
+        super(props);
+     
+        this.state = {
+          email: ''
+        };
+      }
+     
+      render() {
+        return (
+          <form>
+            <input type="text" value={this.state.email} />
+          </form>
+        );
+      }
+    }
+```
+
+Pada elemen input, kita memberikan properti value dengan nilai yang berasal dari state( email).
+Maka, nilai input akan selalu sama dengan nilai state __email__.
+Karena itu, satu satunya cara meng-update nilai input adalah memperbarui nilai komponen state.
+ini adalah contoh dari controlled element, dimana React akan mengontrol nilai dari input form.
+
+nb : nilai input akan selalu mengikuti state, tidak terpengaruh inputan yang kita lakukan ke elemen input teks.
+keanehan ini sudah diperingatkan di dokumentasi React [berikut](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+
+Untuk mengubah nilai state email, kita perlu buat handler seperti ini :
+
+```jsx
+
+    import React from 'react';
+     
+    class NameForm extends React.Component {
+      constructor(props) {
+        super(props);
+     
+        this.state = {
+          email: ''
+        };
+     
+        this.onEmailChangeHandler = this.onEmailChangeHandler.bind(this);
+      }
+     
+      onEmailChangeHandler(event) {
+        this.setState(() => {
+          return {
+            email: event.target.value
+          };
+        });
+      }
+     
+      render() {
+        return (
+          <form>
+            <input 
+            type="text"
+            value={this.state.email}
+            onChange={this.onEmailChangeHandler} />
+          </form>
+        );
+      }
+    }
+
+```
+
+Kapan pun input berubah, fungsi handler akan dipanggil karena kita menetapkan fungsi tersebut pada
+properti onChange.
+
+walaupun dalam membuat controlled komponen, banyak kode yang perlu ditulis, itu memiliki kelebihannya juga.
+Salah satunya kita dapat menerapkan validasi secara instan. Hal ini karena state dikelola oleh komponen. Makanya
+kita bisa menuliskan logika validasi di komponen dan validasi akan dijalankan setiap kali nilai state berubah.
+
+Benefit dari hal tersebut karena adanya input dari pengguna.
+
+Jika ada input ( perubahan) maka UI akan diperbarui menurut state terbaru. Ini adalah konsep inti React.
+tidak hanya pada controlled komponen, tetapi juga komponen React secara umum.
+
+Hal ini dinamakan [one-way data flow](https://react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react) atau [unidirectional data flow](https://legacy.reactjs.org/docs/state-and-lifecycle.html#the-data-flows-down)
