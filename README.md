@@ -621,7 +621,7 @@ class KonakApp extends React.Component{
             <div className="container">
             <div className="content">
                 <h1 className="title">Daftar Kontak</h1>
-                <KonakList kontaks={this.state.kontakskontaks} onDelete={this.onDeleteHandler} />
+                <KonakList kontaks={this.state.kontaks} onDelete={this.onDeleteHandler} />
             </div>
         </div>
     );
