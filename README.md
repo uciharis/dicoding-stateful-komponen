@@ -569,3 +569,64 @@ export default function KonakList({kontaks,onDelete}){ // tambah props onDelete
     );
 }
 ```
+
+Untuk properti onDelete, kita masih melakukan drilling karena nilai handler ada pada komponen KonakApp selaku pemilik data Kontaks.
+
+Selanjutnya, kita akan ubah komponen KonakApp menjadi class komponen. jangan lupa saat ini kita perlu simpan data Kontaks
+di __this.state__ agar perubahan datanya memicu render UI.
+Kemudian buat juga method onDeleteEventHandler untuk menangani event ketika tombol hapus diklik.
+
+Sesuaikan kode di komponen KonakApp menjadi seperti berikut :
+
+KonakApp.jsx
+```jsx
+
+import React from "react";
+import KonakList from "./KonakList";
+import {getData} from './data';
+
+/* -- kode awal ---
+export default function KonakApp(){
+    const kontaks = getData();
+
+    return (
+        <div className="container">
+            <div className="content">
+                <h1 className="title">Daftar Kontak</h1>
+                <KonakList kontaks={kontaks}/>
+            </div>
+        </div>
+    );
+}
+*/
+
+class KonakApp extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            kontaks: getData()
+
+        }
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    }
+
+    onDeleteHandler(id){
+        const kontaks = this.state.kontaks.filter(kontak => kontak.id !== id);
+        this.setState({kontaks});
+    }
+
+    render(){
+
+        return (
+            <div className="container">
+            <div className="content">
+                <h1 className="title">Daftar Kontak</h1>
+                <KonakList kontaks={this.state.kontakskontaks} onDelete={this.onDeleteHandler} />
+            </div>
+        </div>
+    );
+}
+}
+
+export default KonakApp;
+```
