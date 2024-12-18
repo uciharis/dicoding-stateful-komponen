@@ -731,3 +731,6 @@ Jika ada input ( perubahan) maka UI akan diperbarui menurut state terbaru. Ini a
 tidak hanya pada controlled komponen, tetapi juga komponen React secara umum.
 
 Hal ini dinamakan [one-way data flow](https://react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react) atau [unidirectional data flow](https://legacy.reactjs.org/docs/state-and-lifecycle.html#the-data-flows-down)
+
+## Latihan membuat Controlled Komponen
+
