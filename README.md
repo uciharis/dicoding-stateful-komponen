@@ -630,3 +630,8 @@ class KonakApp extends React.Component{
 
 export default KonakApp;
 ```
+
+Jika kode benar, akan menghasilkan tampilan berikut :
+
+Tampilan dengan tombol delete X
+[UI dengan delete button](/images/pic0005.png)
