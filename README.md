@@ -1320,3 +1320,138 @@ Berikut beberapa materi tentang controlled component :
 
 ## Studi Kasus menambah Fitur Kontak
 
+Kita akan menggunakan projek KonakApp 
+
+Langkah pembuatan KonakApp dengan fitur tambah kontak :
+
+- gunakan projek sebelumnya
+- buatlah komponen KonakInput
+- buat class komp KonakInput, termasuk state dan event handlernya untuk masing-masing
+input (termasuk tombol tambah)
+
+KonakInput
+```jsx
+
+import React from 'react';
+
+class KonakInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      tag: ''
+    }
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onTagChangeEventHandler = this.onTagChangeEventHandler.bind(this);
+    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
+  }
+
+  onNameChangeEventHandler(event) {
+    this.setState(() => ({
+      name: event.target.value
+    }));
+  }
+
+  onTagChangeEventHandler(event) {
+    this.setState(() => ({
+      tag: event.target.value
+    }));
+  }
+
+  onSubmitEventHandler(event) {
+    event.preventDefault();
+    this.props.addContact(this.state);
+  }
+
+  render() {
+    return (
+      <form className='contact-input' onSubmit={this.onSubmitEventHandler}>
+        <input 
+          type="text" 
+          placeholder='nama' 
+          value={this.state.name} 
+          onChange={this.onNameChangeEventHandler}
+        />
+        <input 
+          type="text" 
+          placeholder='tag' 
+          value={this.state.tag} 
+          onChange={this.onTagChangeEventHandler}
+        />
+        <button type='submit'>Tambah</button>
+      </form>
+    )
+  }
+}
+
+export default KonakInput;
+
+```
+
+
+- selanjutnya adalah menambahkan handler ke KonakApp menggunakan komponen KonakInput.
+jangan lupa untuk menambahkan handler untuk tambah kontak dengan mengubah state kontaks. Berikan properti id timestamp agar
+selalu unik. Tak lupa untuk menambah KonakInput ke fungsi render serta mengisikan props
+dan nilainya.
+
+KonakApp
+```jsx
+
+import React from "react";
+import KonakList from "./KonakList";
+import { getData } from './data';
+import KonakInput from "./KonakInput";
+
+class KonakApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      kontaks: getData(),
+    }
+
+    this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.onAddKonakHandler = this.onAddKonakHandler.bind(this);
+  }
+
+  onDeleteHandler(id) {
+    const kontaks = this.state.kontaks.filter(kontak => kontak.id !== id);
+    this.setState({ kontaks });
+  }
+
+  onAddKonakHandler({ name, tag }) {
+    this.setState((prevState) => ({
+      kontaks: [
+        ...prevState.kontaks,
+        {
+          id: +new Date(),
+          name,
+          tag,
+          imageUrl: '/images/default.jpeg'
+        }
+      ]
+    }));
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <div className="content">
+          <h1 className="title">Daftar Kontak</h1>
+          <h2>Tambah Kontak</h2>
+          <KonakInput addContact={this.onAddKonakHandler} />
+          <KonakList kontaks={this.state.kontaks} onDelete={this.onDeleteHandler} />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default KonakApp;
+
+```
+
+Jika tepat, hasilnya akan seperti dibawah ini :
+
+![Hasil Final Studi kasus fitur kontak](/images/pic0009.png)
