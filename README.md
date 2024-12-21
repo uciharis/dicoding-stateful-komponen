@@ -1458,3 +1458,15 @@ Jika tepat, hasilnya akan seperti dibawah ini :
 
 ## Debugging komponen menggunakan DevTools
 
+Membangun aplikasi React kadang sulit terutama jika memiliki banyak komponen.
+Terutama jika melibatkan banyak props drilling, nested komponen atau adanya state yang dinamis.
+
+Debugging aplikasi web biasanya menggunakan browser devtools. Namun sayangnya tools ini
+tdak bisa menginspeksi React komponen. Maka dari itu, React DevTools hadir untuk memudahkan
+kita memeriksa hierarki komponen lengkap dengan nilai pros dan state di dalamnya.
+
+React Dev Tools tersedia dalam bentuk addon baik di firefox maupun di chrome.
+
+Setelah memasang, setiap kal membuka aplikasi React, maka akan muncul opsi __Components & Profiler__
+pada browser devtools.
+
