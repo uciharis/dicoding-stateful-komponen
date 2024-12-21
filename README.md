@@ -1171,6 +1171,149 @@ export default MyForm;
 
 ```
 
+nb : dikarenakan dijalankan dengan bantuan stackblitz, maka ada beberapa perbaikan
+
+Perbaikan MyForm
+```jsx
+
+import React from 'react';
+
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    };
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onEmailChangeEventHandler = this.onEmailChangeEventHandler.bind(this);
+    this.onGenderChangeEventHandler = this.onGenderChangeEventHandler.bind(this);
+    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
+  }
+
+  onNameChangeEventHandler(event) {
+    this.setState(() => {
+      return {
+        name: event.target.value
+      };
+    });
+  }
+
+  onEmailChangeEventHandler(event) {
+    this.setState(() => {
+      return {
+        email: event.target.value
+      };
+    });
+  }
+
+  onGenderChangeEventHandler(event) {
+    this.setState(() => {
+      return {
+        gender: event.target.value
+      };
+    });
+  }
+
+  onSubmitEventHandler(event) {
+    event.preventDefault();
+    const message = `
+      Nama: ${this.state.name}
+      Email: ${this.state.email}
+      Jenis Kelamin: ${this.state.gender}
+    `;
+    alert(message);
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <div className="content">
+          <h1 className="title">Register Form</h1>
+          <form onSubmit={this.onSubmitEventHandler} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nama:</label>
+              <input
+                type="text"
+                id="name"
+                value={this.state.name}
+                onChange={this.onNameChangeEventHandler}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email:</label>
+              <input
+                id="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.onEmailChangeEventHandler}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200"
+              />
+            </div>
+            <div>
+              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Jenis kelamin:</label>
+              <select
+                name="gender"
+                id="gender"
+                value={this.state.gender}
+                onChange={this.onGenderChangeEventHandler}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200"
+              >
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default MyForm;
+
+```
+Perbaikan di KonakList
+```jsx
+
+import React from "react";
+import KonakItem from "./KonakItem";
+
+export default function KonakList({ kontaks = [], onDelete }) {
+    if (!kontaks.length) {
+        return (
+            <div className="contact-list">
+                <p className="text-gray-500 text-center">Tidak ada kontak tersedia</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="contact-list">
+            {kontaks.map((kontak) => (
+                <KonakItem 
+                    key={kontak.id} 
+                    id={kontak.id} 
+                    onDelete={onDelete} 
+                    {...kontak} 
+                />
+            ))}
+        </div>
+    );
+}
+
+
+```
+
 Berikut beberapa materi tentang controlled component :
 - [React form](https://legacy.reactjs.org/docs/forms.html)
 - [sharing state between komponent](https://react.dev/learn/sharing-state-between-components)
