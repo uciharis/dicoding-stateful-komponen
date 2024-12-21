@@ -1317,3 +1317,6 @@ export default function KonakList({ kontaks = [], onDelete }) {
 Berikut beberapa materi tentang controlled component :
 - [React form](https://legacy.reactjs.org/docs/forms.html)
 - [sharing state between komponent](https://react.dev/learn/sharing-state-between-components)
+
+## Studi Kasus menambah Fitur Kontak
+
