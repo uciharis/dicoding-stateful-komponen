@@ -229,7 +229,7 @@ Mari kita bahas fungsi setState() lebih dalam.
 this.setState() atau setState merupakan fungsi yang khusus untuk ubah nilai state di dalam class komponen. Fungsi inilah yang sebenarnya picu pemanggilan fungsi render() ketika data di dalam state berubah.
 Fungsi setState() dapat menerima dua tipe params, yaitu ojek dan fungsi yang mengembalikan objek.
 
-parameter adalah objek
+parameter berupa objek
 ```jsx
 
 this.setState({
@@ -237,7 +237,7 @@ this.setState({
 });
 ```
 
-parameter adalah fungsi
+parameter berupa fungsi
 ```jsx
 
 this.setState((previousState)=>{
