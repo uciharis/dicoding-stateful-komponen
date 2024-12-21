@@ -1475,3 +1475,146 @@ Berikut tangkapan layar opsi React DevTools :
 ![React Devtools](/images/pic0010.png)
 
 jangan lupa untuk mengunjungi dokumentasi resmi React DevTools [disini](https://github.com/facebook/react/tree/main/packages/react-devtools-extensions)
+
+## Tips Penggunaan JSX untuk Nubie
+
+Secara umum, sintaks JSX mirip HTML. Namun ada beberapa hal yang perlu diperhatikan yaitu :
+
+- Variabel di JSX
+
+Kapan pun menggunakan JS expression di JSX, selalu bungkus dengan { ... }
+
+```jsx
+
+    render() {
+      const name = 'Dicoding';
+     
+      return (
+        <div>
+          <h1>Hello, {name}</h1>
+          <p>Today is {new Date().toLocaleDateString()}</p>
+          <p>What is 2 + 2? {2 + 2}</p>
+        </div>
+      )
+    }
+
+```
+
+- Tidak ingin tampilkan apapun
+
+Jika tidak ingin komponen menampilkan apapun, cukup return fungsi atau method __render__ dengan __null__
+
+```jsx
+
+    render() {
+      if (isLoading()) {
+        return null;
+      }
+      return (
+        ...
+      );
+    }
+
+```
+
+- Kondisional rendering
+
+Kemampuan menampilkan UI berdasar state merupakan fondasi frontend FW apapun.
+Biasanya masing2 FW menyediakan caranya sendiri.
+
+Jika Angular, vue ataupun svelte memiliki pendekatan berbeda, justru React hanya mendasarkan
+pada standar javascript misal if else.
+
+Berikut contoh kondisional rendering React.
+
+```jsx
+
+    render() {
+      const authed = isAuthed()
+     
+      if (authed) {
+        return <h1>Welcome back!</h1>
+      } else {
+        return <h1>Login to see your dashboard</h1>
+      }
+    }
+
+```
+atau bahkan dapat menggunakan ternary
+
+```jsx
+
+    render() {
+      return isAuthed()
+        ? <h1>Welcome back!</h1>
+        : <h1>Login to see your dashboard</h1>
+    }
+
+```
+
+Bahkan dapat menuliskan ekspressi di dalam kondisional rendering
+
+```jsx
+
+    render() {
+      return (
+        <div>
+          <Logo />
+          {isAuthed() === true
+            ? <h1>Welcome back!</h1>
+            : <h1>Login to see your dashboard</h1>}
+        </div>
+      )
+    }
+
+```
+
+Bandingkan dengan kode Angular dan Vue berikut
+
+Angular
+```javascript
+
+    <h1 *ngIf="authed; else elseBlock">Welcome back!</h1>
+    <ng-template #elseBlock>
+      <h1>Login to see your dashboard</h1>
+    </ng-template>
+
+```
+
+Vue
+```javascript
+
+    <h1 v-if="authed">Welcome back!</h1>
+    <h1 v-else>Login to see your dashboard</h1>
+
+```
+
+- React Fragments
+
+Harus diingat bahwa JSX hanya mengembalikan 1 top level element (root),sehingga jika
+jika ingin mengembalikan 2 atau lebih top level elemen berbeda, perlu dibungkus dengan div atau
+jika tidak ingin ribet memikirkan div, dapat menggunakan React.Fragments
+
+```jsx
+
+    render() {
+      return (
+        <React.Fragment>
+          <h1>Hello, Dicoding</h1>
+          <p>Today is a great day!</p>
+        </React.Fragment>
+      )
+    }
+
+    // atau cara pintasnya
+
+        render() {
+      return (
+        <> <!-- ini adalah shortcut fragment React-->
+          <h1>Hello, Dicoding</h1>
+          <p>Today is a great day!</p>
+        </>
+      )
+    }
+
+```
