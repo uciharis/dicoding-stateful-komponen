@@ -1473,3 +1473,5 @@ pada browser devtools.
 Berikut tangkapan layar opsi React DevTools :
 
 ![React Devtools](/images/pic0010.png)
+
+jangan lupa untuk mengunjungi dokumentasi resmi React DevTools [disini](https://github.com/facebook/react/tree/main/packages/react-devtools-extensions)
