@@ -1467,6 +1467,9 @@ kita memeriksa hierarki komponen lengkap dengan nilai pros dan state di dalamnya
 
 React Dev Tools tersedia dalam bentuk addon baik di firefox maupun di chrome.
 
-Setelah memasang, setiap kal membuka aplikasi React, maka akan muncul opsi __Components & Profiler__
+Setelah memasang, setiap kali membuka aplikasi React, maka akan muncul opsi __Components & Profiler__
 pada browser devtools.
 
+Berikut tangkapan layar opsi React DevTools :
+
+![React Devtools](/images/pic0010.png)
