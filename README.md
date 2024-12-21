@@ -734,3 +734,71 @@ Hal ini dinamakan [one-way data flow](https://react.dev/learn/thinking-in-react#
 
 ## Latihan membuat Controlled Komponen
 
+Kita akan membuat dan mengelolah nilai pada form menggunakan React. Tujuannya agar kita memahami
+cara kerja controlled komponen di mana state pada form diatur oleh React, bukan DOM.
+
+Berikut tampilan form yang akan dibuat.
+
+![Form menggunakan React](/images/pic0006.png)
+
+Langkah pertama adalah buatlah komponen baru MyForm.jsx lalu isikan kodenya seperti berikut:
+
+MyForm.jsx
+```jsx
+
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="">
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender">
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+
+```
+
+Selanjutnya, kita bisa menambahkan komponen tersebut ke dalam index.jsx dengan membuat fragmen.
+Dengan adanya fragment, kita bisa memuat Komponen KonakApp dan MyForm.
+
+index.jsx
+```jsx
+
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import KonakApp from './KonakApp';
+import MyForm from './MyForm';
+
+
+createRoot(document.getElementById('root')).render(<>
+<KonakApp />
+<MyForm />
+</>
+)
+```
+
+Hasilnya kurang lebih akan seperti ini.
+
+![hasil MyForm](/images/pic0007.png)
+
+Saat ini, kita bisa berinteraksi dengan form tersebut. namun state dari MyForm belum dikontrol
+sepenuhnya oleh React karena data ini masih disimpan di dalam DOM. Untuk bacaan lebih dalam, silahkan
+menuju link [lama (uncontrolled comps)](https://legacy.reactjs.org/docs/uncontrolled-components.html)  atau
+yang [baru (controlled uncontrolled comps)](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+
