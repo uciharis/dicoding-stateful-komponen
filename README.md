@@ -802,3 +802,371 @@ sepenuhnya oleh React karena data ini masih disimpan di dalam DOM. Untuk bacaan 
 menuju link [lama (uncontrolled comps)](https://legacy.reactjs.org/docs/uncontrolled-components.html)  atau
 yang [baru (controlled uncontrolled comps)](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
 
+Agar nilai state dari form dapat dikontrol oleh React, kita perlu menyiapkan nilai state pada masing-masing
+input yang ada.
+silahkan initialize __state__ untuk nilai nama, email dan gender pada konstruktor.
+
+MyForm
+```jsx
+
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  constructor (props){ // buat state
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    }
+  }
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="">
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" value={this.state.name}/> <!-- letakkan state di masing2 tempat--->
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="text" value={this.state.email} />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender" value={this.state.gender}>
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+
+```
+
+Selanjutnya kita akan mengubah nilai komponen state nya.
+Siapkan event handler untuk menangani perubahan state di masing-masing input.
+
+MyForm
+```jsx
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    };
+    // binding this context to event handler
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onEmailChangeEventHandler = this.onEmailChangeEventHandler.bind(this);
+    this.onGenderChangeEventHandler = this.onGenderChangeEventHandler.bind(this);
+
+    onNameChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          name: event.target.value
+        };
+      });
+    }
+
+    onEmailChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          email: event.target.value
+        };
+      });
+    }
+
+    onGenderChangeEventHandler(event){
+      this.setState((prevState) => {
+        return {
+          gender: event.target.value
+        };
+      });
+    }
+
+  }
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="">
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" value={this.state.name}/>
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="text" value={this.state.email} />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender" value={this.state.gender}>
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+```
+
+Selanjutnya, gunakan event handler pada masing-masing element <input> lewat props onChange.
+Fungsi event handler akan dijalankan dan mengubah nilai state setiap kali ada perubahan data
+yang dilakukan oleh pengguna di <input> dan <select>.
+
+MyForm
+```jsx
+
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    };
+    // binding this context to event handler
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onEmailChangeEventHandler = this.onEmailChangeEventHandler.bind(this);
+    this.onGenderChangeEventHandler = this.onGenderChangeEventHandler.bind(this);
+
+    onNameChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          name: event.target.value
+        };
+      });
+    }
+
+    onEmailChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          email: event.target.value
+        };
+      });
+    }
+
+    onGenderChangeEventHandler(event){
+      this.setState((prevState) => {
+        return {
+          gender: event.target.value
+        };
+      });
+    }
+
+  }
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="">
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" value={this.state.name} onChange={this.onNameChangeEventHandler} />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="text" value={this.state.email} onChange={this.onEmailChangeEventHandler}  />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender" value={this.state.gender} onChange={this.onGenderChangeEventHandler} />
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+
+```
+Selanjutnya kita akan mengaktifkan alert sesuai data yang dimasukkan ke dalam elemen <input>.
+
+MyForm
+```jsx
+
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    };
+    // binding this context to event handler
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onEmailChangeEventHandler = this.onEmailChangeEventHandler.bind(this);
+    this.onGenderChangeEventHandler = this.onGenderChangeEventHandler.bind(this);
+    this.onSubmitEventHandler = this.onEmailChangeEventHandler.bind(this);
+
+    onNameChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          name: event.target.value
+        };
+      });
+    }
+
+    onEmailChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          email: event.target.value
+        };
+      });
+    }
+
+    onGenderChangeEventHandler(event){
+      this.setState((prevState) => {
+        return {
+          gender: event.target.value
+        };
+      });
+    }
+
+    onSubmitEventHandler(event){
+      event.preventDefault();
+      const message= `
+      Nama: ${this.state.name}
+      Email: ${this.state.email}
+      Jenis Kelamin: ${this.state.gender}
+      `;
+
+      alert(message);
+    }
+
+
+  }
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="">
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" value={this.state.name} onChange={this.onNameChangeEventHandler} />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="text" value={this.state.email} onChange={this.onEmailChangeEventHandler}  />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender" value={this.state.gender} onChange={this.onGenderChangeEventHandler} />
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+
+```
+
+Lalu terapkan event handler di element <form> lewat props onSubmit.
+
+MyForm
+```jsx
+
+import React from 'react' ;
+
+class MyForm extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      gender: 'Laki-laki'
+    };
+    // binding this context to event handler
+
+    this.onNameChangeEventHandler = this.onNameChangeEventHandler.bind(this);
+    this.onEmailChangeEventHandler = this.onEmailChangeEventHandler.bind(this);
+    this.onGenderChangeEventHandler = this.onGenderChangeEventHandler.bind(this);
+    this.onSubmitEventHandler = this.onEmailChangeEventHandler.bind(this);
+
+    onNameChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          name: event.target.value
+        };
+      });
+    }
+
+    onEmailChangeEventHandler(event){
+      this.setState(()=> {
+        return {
+          email: event.target.value
+        };
+      });
+    }
+
+    onGenderChangeEventHandler(event){
+      this.setState((prevState) => {
+        return {
+          gender: event.target.value
+        };
+      });
+    }
+
+    onSubmitEventHandler(event){
+      event.preventDefault();
+      const message= `
+      Nama: ${this.state.name}
+      Email: ${this.state.email}
+      Jenis Kelamin: ${this.state.gender}
+      `;
+
+      alert(message);
+    }
+
+
+  }
+  render(){
+    return (
+      <>
+      <h1>Register Form</h1>
+      <form action="" onSubmit={this.onSubmitEventHandler}>
+        <label htmlFor="name">Nama :</label>
+        <input type="text" id="name" value={this.state.name} onChange={this.onNameChangeEventHandler} />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="text" value={this.state.email} onChange={this.onEmailChangeEventHandler}  />
+        <br />
+        <label htmlFor="gender">Jenis kelamin :</label>
+        <select name="gender" id="gender" value={this.state.gender} onChange={this.onGenderChangeEventHandler} />
+          <option value="man">Laki-laki</option>
+          <option value="woman">Perempuan</option>
+        </select>
+        <br />
+        <button type="submit">Send</button>
+      </form>
+      </>
+    )
+  }
+}
+
+export default MyForm;
+
+
+```
