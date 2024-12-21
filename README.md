@@ -1455,3 +1455,6 @@ export default KonakApp;
 Jika tepat, hasilnya akan seperti dibawah ini :
 
 ![Hasil Final Studi kasus fitur kontak](/images/pic0009.png)
+
+## Debugging komponen menggunakan DevTools
+
