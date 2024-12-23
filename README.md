@@ -923,9 +923,9 @@ export default MyForm;
 
 ```
 
-Selanjutnya, gunakan event handler pada masing-masing element <input> lewat props onChange.
+Selanjutnya, gunakan event handler pada masing-masing element input lewat props onChange.
 Fungsi event handler akan dijalankan dan mengubah nilai state setiap kali ada perubahan data
-yang dilakukan oleh pengguna di <input> dan <select>.
+yang dilakukan oleh pengguna di input dan select.
 
 MyForm
 
