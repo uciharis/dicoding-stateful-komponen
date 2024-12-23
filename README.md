@@ -20,7 +20,7 @@ Komponen React yang dibuat menggunakan fungsi lebih dikenal dengan functional co
 
 Berikut perbedaan functional komponent (di materi basic React sebelumnya sering kita sebut React komponen) dan class komponen.
 
-functiona komponen
+function komponen
 ```jsx
 
 import React from 'react' ;
@@ -926,6 +926,7 @@ Fungsi event handler akan dijalankan dan mengubah nilai state setiap kali ada pe
 yang dilakukan oleh pengguna di <input> dan <select>.
 
 MyForm
+
 ```jsx
 
 import React from 'react' ;
@@ -1086,6 +1087,7 @@ export default MyForm;
 Lalu terapkan event handler di element <form> lewat props onSubmit.
 
 MyForm
+
 ```jsx
 
 import React from 'react' ;
@@ -1168,12 +1170,12 @@ class MyForm extends React.Component {
 
 export default MyForm;
 
-
 ```
 
 nb : dikarenakan dijalankan dengan bantuan stackblitz, maka ada beberapa perbaikan
 
 Perbaikan MyForm
+
 ```jsx
 
 import React from 'react';
@@ -1283,6 +1285,7 @@ export default MyForm;
 
 ```
 Perbaikan di KonakList
+
 ```jsx
 
 import React from "react";
