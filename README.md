@@ -852,6 +852,7 @@ Selanjutnya kita akan mengubah nilai komponen state nya.
 Siapkan event handler untuk menangani perubahan state di masing-masing input.
 
 MyForm
+
 ```jsx
 import React from 'react' ;
 
@@ -919,6 +920,7 @@ class MyForm extends React.Component {
 }
 
 export default MyForm;
+
 ```
 
 Selanjutnya, gunakan event handler pada masing-masing element <input> lewat props onChange.
@@ -995,8 +997,8 @@ class MyForm extends React.Component {
 }
 
 export default MyForm;
-
 ```
+
 Selanjutnya kita akan mengaktifkan alert sesuai data yang dimasukkan ke dalam elemen <input>.
 
 MyForm
